@@ -1,6 +1,6 @@
 import { Close } from "@radix-ui/react-dialog";
 
-import { Button } from "~/components/ui/button";
+import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
+import { cn } from "~/lib/utils";
 import { type WatchlistColumn } from "./columns";
 
 export default function WatchlistActionDescription({
@@ -55,28 +56,34 @@ export default function WatchlistActionDescription({
           <Close asChild>
             <Button variant="outline">Close</Button>
           </Close>
-          <Button>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://www.imdb.com/title/${row.imdbId}`}
-            >
-              <span>View on IMDb</span>
-            </a>
-          </Button>
-          <Button>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={
-                row.type === "MOVIE"
-                  ? `https://www.themoviedb.org/movie/${row.tmdbId}`
-                  : `https://www.themoviedb.org/tv/${row.tmdbId}`
-              }
-            >
-              <span>View on TMDB</span>
-            </a>
-          </Button>
+          <a
+            className={cn(
+              buttonVariants({
+                variant: "default",
+              }),
+            )}
+            target="_blank"
+            rel="noreferrer"
+            href={`https://www.imdb.com/title/${row.imdbId}`}
+          >
+            <span>View on IMDb</span>
+          </a>
+          <a
+            className={cn(
+              buttonVariants({
+                variant: "default",
+              }),
+            )}
+            target="_blank"
+            rel="noreferrer"
+            href={
+              row.type === "MOVIE"
+                ? `https://www.themoviedb.org/movie/${row.tmdbId}`
+                : `https://www.themoviedb.org/tv/${row.tmdbId}`
+            }
+          >
+            <span>View on TMDB</span>
+          </a>
         </DialogFooter>
       </DialogContent>
     </Dialog>

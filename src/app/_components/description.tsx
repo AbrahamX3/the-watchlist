@@ -28,7 +28,7 @@ export default function WatchlistActionDescription({
         onChange(!open);
       }}
     >
-      <DialogContent className="h-screen sm:h-auto sm:max-h-[97vh]">
+      <DialogContent className="h-screen max-h-[90dvh] sm:h-auto">
         <DialogHeader>
           <DialogTitle>
             {row.title}
@@ -51,7 +51,7 @@ export default function WatchlistActionDescription({
         <div className="w-full">
           <p>{row.description}</p>
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex flex-col-reverse gap-4 sm:flex-row sm:gap-0">
           <Close asChild>
             <Button variant="outline">Close</Button>
           </Close>

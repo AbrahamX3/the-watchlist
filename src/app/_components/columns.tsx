@@ -4,7 +4,6 @@ import { type Prisma } from "@prisma/client";
 import { type ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "~/components/ui/datatable/data-table-column-header";
-import DataTableLabelId from "~/components/ui/datatable/data-table-label-id";
 import { genreOptions, statusOptions, typeOptions } from "~/lib/options";
 import { WatchlistActions } from "./actions";
 
@@ -12,15 +11,6 @@ export type WatchlistColumn = Prisma.WatchlistGetPayload<object>;
 
 export function WatchlistColumns() {
   const columns: ColumnDef<WatchlistColumn>[] = [
-    {
-      accessorKey: "id",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Id" />
-      ),
-      cell: ({ row }) => {
-        return <DataTableLabelId id={row.getValue("id")} />;
-      },
-    },
     {
       accessorKey: "title",
       header: ({ column }) => (

@@ -1,3 +1,4 @@
+import { type Metadata } from "next";
 import { type Prisma } from "@prisma/client";
 import { Toaster } from "sonner";
 
@@ -9,6 +10,10 @@ import DataTableView from "./_components/data-table-view";
 import SiteHeader from "./_components/header";
 
 export type WatchlistColumn = Prisma.WatchlistGetPayload<object>;
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
 
 export default async function Dashboard() {
   const data = await api.watchlist.getAll.query();

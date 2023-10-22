@@ -32,6 +32,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
     TMDB_API_KEY: z.string(),
+    ADMINISTRATOR_EMAIL: z.string(),
   },
 
   /**
@@ -55,6 +56,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     TMDB_API_KEY: process.env.TMDB_API_KEY,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    ADMINISTRATOR_EMAIL: process.env.ADMINISTRATOR_EMAIL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -19,6 +19,16 @@ declare module "next-auth" {
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    redirect() {
+      return "/dashboard";
+    },
+    signIn({ profile }) {
+      if (profile?.email !== env.ADMINISTRATOR_EMAIL) {
+        return false;
+      }
+
+      return true;
+    },
     session: ({ session, user }) => ({
       ...session,
       user: {

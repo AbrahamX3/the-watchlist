@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 
+import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 
@@ -12,8 +13,12 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-export const metadata = {
-  title: "Abraham's Watchlist",
+
+export const metadata: Metadata = {
+  title: {
+    template: "Abraham's Watchlist | %s",
+    default: "Abraham's Watchlist",
+  },
   description: "List of all the show's and movies I've watched",
   icons: [{ rel: "icon", url: "/icon.png" }],
 };

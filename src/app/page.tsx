@@ -4,7 +4,7 @@ import { Toaster } from "sonner";
 import TableContainer from "~/components/ui/datatable/data-table-container";
 import DataTableHeader from "~/components/ui/datatable/data-table-header";
 import { api } from "~/trpc/server";
-import DataTableView from "./_components/data-table-view";
+import PublicDataTableView from "./_components/data-table-view";
 import SiteHeader from "./_components/header";
 
 export type WatchlistColumn = Prisma.WatchlistGetPayload<object>;
@@ -16,7 +16,7 @@ export default async function Dashboard() {
       <SiteHeader />
       <TableContainer>
         <DataTableHeader mobileTitle="Watchlist" desktopTitle="Watchlist" />
-        <DataTableView data={data} />
+        <PublicDataTableView data={data} />
         <Toaster richColors position="bottom-left" />
       </TableContainer>
     </>

@@ -10,7 +10,7 @@ import { WatchlistActions } from "./actions";
 
 export type WatchlistColumn = Prisma.WatchlistGetPayload<object>;
 
-export function WatchlistColumns() {
+export function DashboardWatchlistColumns() {
   const columns: ColumnDef<WatchlistColumn>[] = [
     {
       accessorKey: "id",

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { type Row } from "@tanstack/react-table";
 import { Info, MoreHorizontal } from "lucide-react";
 
+import WatchlistActionDescription from "~/components/action-description";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -12,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { type WatchlistColumn } from "./columns";
-import WatchlistActionDescription from "./description";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -41,7 +41,7 @@ export function WatchlistActions<TData>({
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setDescriptionModal(true)}>
               <Info className="mr-2 h-4 w-4" />
-              View Description
+              View Details
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -90,15 +90,15 @@ export default function SiteHeader() {
                 <Image
                   alt="Abraham's Personal Website"
                   src="/icon.webp"
-                  width={24}
-                  height={24}
+                  width={20}
+                  height={20}
                 />
               </div>
             </Link>
             <ModeToggle />
-            <Button variant="ghost" onClick={() => signOut()}>
+            <Button variant="outline" size="icon" onClick={() => signOut()}>
               <span className="sr-only">Sign out</span>
-              <LogOut className="h-4 w-4" />
+              <LogOut className="h-[1.2rem] w-[1.2rem]" />
             </Button>
           </nav>
         </div>

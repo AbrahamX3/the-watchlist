@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import WatchlistActionDescription from "~/components/action-description";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -22,7 +23,6 @@ import {
 import { api } from "~/trpc/react";
 import { type WatchlistColumn } from "./columns";
 import WatchlistActionDelete from "./delete";
-import WatchlistActionDescription from "./description";
 import WatchlistActionUpdateStatus from "./status";
 
 interface DataTableRowActionsProps<TData> {
@@ -32,7 +32,7 @@ export function WatchlistActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const data = row.original as WatchlistColumn;
-  const utils = api.useContext();
+  const utils = api.useUtils();
   const router = useRouter();
   const [descriptionModal, setDescriptionModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -63,7 +63,7 @@ export function WatchlistActions<TData>({
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setDescriptionModal(true)}>
               <Info className="mr-2 h-4 w-4" />
-              View Description
+              View Details
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() =>

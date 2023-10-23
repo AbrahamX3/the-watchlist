@@ -2,9 +2,13 @@
 
 import { DataTable } from "~/components/ui/datatable/data-table";
 import { genreOptions, statusOptions, typeOptions } from "~/lib/options";
-import { WatchlistColumns, type WatchlistColumn } from "./columns";
+import { PublicWatchlistColumns, type WatchlistColumn } from "./columns";
 
-export default function DataTableView({ data }: { data: WatchlistColumn[] }) {
+export default function PublicDataTableView({
+  data,
+}: {
+  data: WatchlistColumn[];
+}) {
   const filters = [
     {
       columnId: "type",
@@ -25,7 +29,7 @@ export default function DataTableView({ data }: { data: WatchlistColumn[] }) {
 
   return (
     <DataTable
-      columns={WatchlistColumns()}
+      columns={PublicWatchlistColumns()}
       data={data}
       filters={filters}
       isLoading={false}

@@ -86,8 +86,8 @@ export default function SiteHeader() {
                 <Image
                   alt="Abraham's Personal Website"
                   src="/icon.webp"
-                  width={24}
-                  height={24}
+                  width={20}
+                  height={20}
                 />
               </div>
             </Link>

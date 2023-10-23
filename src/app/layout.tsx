@@ -4,6 +4,7 @@ import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 
+import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";
 import { ThemeProvider } from "~/components/theme-provider";
 import { getServerAuthSession } from "~/server/auth";
@@ -41,6 +42,7 @@ export default async function RootLayout({
           <NextAuthProvider session={session}>
             <TRPCReactProvider headers={headers()}>
               {children}
+              <SiteFooter />
             </TRPCReactProvider>
           </NextAuthProvider>
         </ThemeProvider>

@@ -421,7 +421,7 @@ export default function WatchlistActionCreate() {
               )}
             </div>
             {selectedTitle && (
-              <DialogFooter>
+              <DialogFooter className="flex flex-col-reverse gap-4 sm:flex-row sm:gap-0">
                 <Close asChild>
                   <Button variant="outline">Close</Button>
                 </Close>

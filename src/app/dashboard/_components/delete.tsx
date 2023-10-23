@@ -22,7 +22,7 @@ export default function WatchlistActionDelete({
   open: boolean;
   onChange: (open: boolean) => void;
 }) {
-  const utils = api.useContext();
+  const utils = api.useUtils();
   const router = useRouter();
 
   const { mutate, isLoading } = api.watchlist.delete.useMutation({

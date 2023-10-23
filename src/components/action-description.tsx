@@ -57,7 +57,7 @@ export default function WatchlistActionDescription({
             )}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="h-40 w-full">
+        <ScrollArea className="my-4 h-40 w-full">
           <div className="flex flex-col items-center justify-center gap-4 align-middle md:flex-row">
             {row.poster ? (
               <Dialog>
@@ -92,13 +92,10 @@ export default function WatchlistActionDescription({
           </div>
         </ScrollArea>
         <DialogFooter className="flex flex-col-reverse gap-4 sm:flex-row sm:gap-0">
-          <Close asChild>
-            <Button variant="outline">Close</Button>
-          </Close>
           <a
             className={cn(
               buttonVariants({
-                variant: "default",
+                variant: "link",
               }),
             )}
             target="_blank"
@@ -110,7 +107,7 @@ export default function WatchlistActionDescription({
           <a
             className={cn(
               buttonVariants({
-                variant: "default",
+                variant: "link",
               }),
             )}
             target="_blank"
@@ -123,6 +120,9 @@ export default function WatchlistActionDescription({
           >
             <span>View on TMDB</span>
           </a>
+          <Close asChild>
+            <Button variant="outline">Close</Button>
+          </Close>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -7,11 +7,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Close } from "@radix-ui/react-dialog";
 import { Loader2, Plus, SearchIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import ModalImage from "react-modal-image";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { Button } from "~/components/ui/button";
+import { Badge } from "~/components/ui/badge";
+import { Button, buttonVariants } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -48,6 +48,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { statusOptions } from "~/lib/options";
+import { cn } from "~/lib/utils";
 import { type MultiSearch, type SearchResult } from "~/server/api/routers/tmdb";
 import { api } from "~/trpc/react";
 
@@ -335,47 +336,115 @@ export default function WatchlistActionCreate() {
                 />
               )}
               {selectedTitle && (
-                <Card className="col-span-3 p-4">
-                  <CardTitle className="text-lg">
-                    {selectedTitle.title ?? selectedTitle.name} - #
-                    {selectedTitle.id}
+                <Card className="col-span-3 w-full p-4">
+                  <CardTitle className="flex flex-wrap gap-2 text-lg">
+                    {selectedTitle.title ?? selectedTitle.name}
+                    <span>(#{selectedTitle.id})</span>
+                    <a
+                      className={cn(
+                        buttonVariants({
+                          variant: "link",
+                          size: "sm",
+                        }),
+                      )}
+                      target="_blank"
+                      rel="noreferrer"
+                      href={
+                        selectedTitle.media_type === "movie"
+                          ? `https://www.themoviedb.org/movie/${selectedTitle.id}`
+                          : `https://www.themoviedb.org/tv/${selectedTitle.id}`
+                      }
+                    >
+                      <span>View on TMDB</span>
+                    </a>
                   </CardTitle>
-                  <CardDescription className="text-base">
-                    {selectedTitle.vote_average?.toFixed(1)} -{" "}
-                    {selectedTitle.first_air_date
-                      ? new Date(
+                  <CardDescription className="mt-2 flex gap-2 text-base">
+                    {selectedTitle.vote_average ? (
+                      <Badge className="text-xs" variant="secondary">{`${Number(
+                        selectedTitle.vote_average,
+                      ).toFixed(1)} / 10`}</Badge>
+                    ) : (
+                      ""
+                    )}
+                    {selectedTitle.first_air_date ? (
+                      <Badge variant="outline">
+                        {new Date(
                           selectedTitle.first_air_date,
-                        ).toLocaleDateString()
-                      : selectedTitle.release_date
-                      ? new Date(
+                        ).toLocaleDateString()}
+                      </Badge>
+                    ) : selectedTitle.release_date ? (
+                      <Badge variant="outline">
+                        {new Date(
                           selectedTitle.release_date,
-                        ).toLocaleDateString()
-                      : ""}
+                        ).toLocaleDateString()}
+                      </Badge>
+                    ) : (
+                      ""
+                    )}
+                    {selectedTitle.media_type === "movie" ? (
+                      <Badge>Movie</Badge>
+                    ) : (
+                      <Badge>Series</Badge>
+                    )}
                   </CardDescription>
                   <CardContent className="p-0 pt-4">
-                    <ScrollArea className="h-40 w-full">
-                      <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+                    <ScrollArea className="my-4 h-40 w-full">
+                      <p className="flex flex-col items-center justify-center gap-4 md:flex-row">
                         {selectedTitle.poster_path && selectedTitle.title ? (
-                          <ModalImage
-                            small={`https://image.tmdb.org/t/p/w200${selectedTitle.poster_path}`}
-                            medium={`https://image.tmdb.org/t/p/w500${selectedTitle.poster_path}`}
-                            large={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
-                            className="rounded-md"
-                            alt={selectedTitle.title}
-                          />
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Image
+                                unoptimized
+                                loading="eager"
+                                src={`https://image.tmdb.org/t/p/w200${selectedTitle.poster_path}`}
+                                alt={selectedTitle.title}
+                                width={80}
+                                height={120}
+                                className="cursor-pointer rounded-md transition-all hover:scale-105"
+                              />
+                            </DialogTrigger>
+                            <DialogContent className="h-screen max-h-[90dvh] w-full">
+                              <Image
+                                src={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
+                                alt={selectedTitle.title}
+                                unoptimized
+                                loading="eager"
+                                fill
+                                className="rounded-md object-contain p-6"
+                              />
+                            </DialogContent>
+                          </Dialog>
                         ) : selectedTitle.poster_path && selectedTitle.name ? (
-                          <ModalImage
-                            small={`https://image.tmdb.org/t/p/w200${selectedTitle.poster_path}`}
-                            medium={`https://image.tmdb.org/t/p/w500${selectedTitle.poster_path}`}
-                            large={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
-                            className="z-0"
-                            alt={selectedTitle.name}
-                          />
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Image
+                                unoptimized
+                                loading="eager"
+                                src={`https://image.tmdb.org/t/p/w200${selectedTitle.poster_path}`}
+                                alt={selectedTitle.name}
+                                width={80}
+                                height={120}
+                                className="cursor-pointer rounded-md transition-all hover:scale-105"
+                              />
+                            </DialogTrigger>
+                            <DialogContent className="h-screen max-h-[90dvh] w-full">
+                              <Image
+                                src={`https://image.tmdb.org/t/p/original${selectedTitle.poster_path}`}
+                                alt={selectedTitle.name}
+                                unoptimized
+                                loading="eager"
+                                fill
+                                className="rounded-md object-contain p-6"
+                              />
+                            </DialogContent>
+                          </Dialog>
                         ) : (
                           <div className="h-20 w-16 rounded-md bg-gray-200" />
                         )}
-                        <div>{selectedTitle.overview}</div>
-                      </div>
+                        <p className="max-w-prose text-left leading-6 tracking-wide">
+                          {selectedTitle.overview}
+                        </p>
+                      </p>
                     </ScrollArea>
                   </CardContent>
                   <CardFooter className="p-0">

@@ -69,7 +69,7 @@ export default function WatchlistActionDescription({
                     alt={row.title}
                     width={80}
                     height={120}
-                    className="rounded-md transition-all hover:scale-105"
+                    className="cursor-pointer rounded-md transition-all hover:scale-105"
                   />
                 </DialogTrigger>
                 <DialogContent className="h-screen max-h-[90dvh] w-full">

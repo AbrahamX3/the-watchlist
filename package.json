@@ -64,7 +64,6 @@
     "react-day-picker": "^8.9.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
-    "react-modal-image": "^2.6.0",
     "sonner": "^1.0.3",
     "superjson": "^2.0.0",
     "tailwind-merge": "^1.14.0",

@@ -3,9 +3,11 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/react";
 
 import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";
+import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { ThemeProvider } from "~/components/theme-provider";
 import { getServerAuthSession } from "~/server/auth";
 import { TRPCReactProvider } from "~/trpc/react";
@@ -43,9 +45,11 @@ export default async function RootLayout({
             <TRPCReactProvider headers={headers()}>
               {children}
               <SiteFooter />
+              <TailwindIndicator />
             </TRPCReactProvider>
           </NextAuthProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

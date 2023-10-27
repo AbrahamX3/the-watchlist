@@ -58,7 +58,7 @@ const formSchema = z.object({
 });
 
 export default function WatchlistActionCreate() {
-  const utils = api.useContext();
+  const utils = api.useUtils();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -123,7 +123,7 @@ export default function WatchlistActionCreate() {
       type: selectedTitle.media_type === "tv" ? "SERIES" : "MOVIE",
       title: title,
       status: values.status,
-      year: new Date(release),
+      date: new Date(release),
       description: selectedTitle.overview,
       genres: selectedTitle.genre_ids ?? [],
       poster: selectedTitle.poster_path ?? "",

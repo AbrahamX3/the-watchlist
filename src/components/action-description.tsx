@@ -28,13 +28,7 @@ export default function WatchlistActionDescription({
   row: WatchlistColumn;
 }) {
   return (
-    <Dialog
-      modal
-      open={open}
-      onOpenChange={() => {
-        onChange(!open);
-      }}
-    >
+    <Dialog modal open={open} onOpenChange={() => onChange(!open)}>
       <DialogContent className="h-screen max-h-[90dvh] sm:h-auto">
         <DialogHeader>
           <DialogTitle>
@@ -47,48 +41,53 @@ export default function WatchlistActionDescription({
               ""
             )}
           </DialogTitle>
-          <DialogDescription>
-            {row.year ? (
-              <Badge variant="outline">
-                {new Date(row.year).toLocaleDateString()}
+          <DialogDescription asChild>
+            {row.date ? (
+              <Badge variant="outline" className="w-fit">
+                {new Date(row.date).toLocaleDateString()}
               </Badge>
             ) : (
               ""
             )}
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="my-4 h-40 w-full">
+        <ScrollArea className="my-4 w-full">
           <div className="flex flex-col items-center justify-center gap-4 align-middle md:flex-row">
-            {row.poster ? (
+            {row.poster && row.posterBlur ? (
               <Dialog>
                 <DialogTrigger asChild>
                   <Image
                     unoptimized
-                    loading="eager"
-                    src={`https://image.tmdb.org/t/p/w200${row.poster}`}
+                    placeholder="blur"
+                    blurDataURL={row.posterBlur}
+                    src={`https://image.tmdb.org/t/p/w154${row.poster}`}
                     alt={row.title}
-                    width={80}
-                    height={120}
-                    className="cursor-pointer rounded-md transition-all hover:scale-105"
+                    width={154}
+                    height={231}
+                    className="h-36 w-auto cursor-pointer rounded-md transition-all hover:scale-105"
                   />
                 </DialogTrigger>
-                <DialogContent className="h-screen max-h-[90dvh] w-full">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original${row.poster}`}
-                    alt={row.title}
-                    unoptimized
-                    loading="eager"
-                    fill
-                    className="rounded-md object-contain p-6"
-                  />
+                <DialogContent className="h-[90vh]">
+                  <div className="h-[85vh] w-full">
+                    <Image
+                      placeholder="blur"
+                      blurDataURL={row.posterBlur}
+                      src={`https://image.tmdb.org/t/p/w780${row.poster}`}
+                      alt={row.title}
+                      unoptimized
+                      width={780}
+                      height={1170}
+                      className="h-full w-full rounded-md p-6"
+                    />
+                  </div>
                 </DialogContent>
               </Dialog>
             ) : (
               <div className="h-20 w-16 rounded-md bg-gray-200" />
             )}
-            <p className="max-w-prose text-left leading-6 tracking-wide">
+            <div className="m-4 max-w-prose leading-6 tracking-wide">
               {row.description}
-            </p>
+            </div>
           </div>
         </ScrollArea>
         <DialogFooter className="flex flex-col-reverse gap-4 sm:flex-row sm:gap-0">

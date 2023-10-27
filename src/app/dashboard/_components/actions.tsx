@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { type Row } from "@tanstack/react-table";
@@ -46,70 +48,68 @@ export function WatchlistActions<TData>({
   });
 
   return (
-    <>
-      <div className="relative">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-            >
-              <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => setDescriptionModal(true)}>
-              <Info className="mr-2 h-4 w-4" />
-              View Details
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                update.mutate({
-                  id: data.id,
-                  type: data.type,
-                  tmdbId: data.tmdbId,
-                })
-              }
-            >
-              <RefreshCcw className="mr-2 h-4 w-4" />
-              Refresh
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setUpdateStatusModal(true)}>
-              <BookOpenCheck className="mr-2 h-4 w-4" />
-              Update Status
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setDeleteModal(true)}>
-              <Trash className="mr-2 h-4 w-4" />
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        {deleteModal && (
-          <WatchlistActionDelete
-            id={data.id}
-            onChange={setDeleteModal}
-            open={deleteModal}
-          />
-        )}
-        {descriptionModal && (
-          <WatchlistActionDescription
-            row={data}
-            open={descriptionModal}
-            onChange={setDescriptionModal}
-          />
-        )}
-        {updateStatusModal && (
-          <WatchlistActionUpdateStatus
-            id={data.id}
-            open={updateStatusModal}
-            onChange={setUpdateStatusModal}
-            status={data.status}
-          />
-        )}
-      </div>
-    </>
+    <div className="relative">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+          >
+            <MoreHorizontal className="h-4 w-4" />
+            <span className="sr-only">Open menu</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[160px]">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setDescriptionModal(true)}>
+            <Info className="mr-2 h-4 w-4" />
+            View Details
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() =>
+              update.mutate({
+                id: data.id,
+                type: data.type,
+                tmdbId: data.tmdbId,
+              })
+            }
+          >
+            <RefreshCcw className="mr-2 h-4 w-4" />
+            Refresh
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setUpdateStatusModal(true)}>
+            <BookOpenCheck className="mr-2 h-4 w-4" />
+            Update Status
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setDeleteModal(true)}>
+            <Trash className="mr-2 h-4 w-4" />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      {deleteModal && (
+        <WatchlistActionDelete
+          id={data.id}
+          onChange={setDeleteModal}
+          open={deleteModal}
+        />
+      )}
+      {descriptionModal && (
+        <WatchlistActionDescription
+          row={data}
+          open={descriptionModal}
+          onChange={setDescriptionModal}
+        />
+      )}
+      {updateStatusModal && (
+        <WatchlistActionUpdateStatus
+          id={data.id}
+          open={updateStatusModal}
+          onChange={setUpdateStatusModal}
+          status={data.status}
+        />
+      )}
+    </div>
   );
 }

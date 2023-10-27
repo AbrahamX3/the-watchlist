@@ -1,3 +1,4 @@
+import { getPlaiceholder } from "plaiceholder";
 import { z } from "zod";
 
 import { env } from "~/env.mjs";
@@ -179,6 +180,15 @@ async function getIMDbId(
   return data.imdb_id;
 }
 
+async function fetchBase64(path: string) {
+  const buffer = await fetch(path).then(async (res) =>
+    Buffer.from(await res.arrayBuffer()),
+  );
+
+  const { base64 } = await getPlaiceholder(buffer);
+
+  return base64;
+}
 async function getTMDBMovieDetails({
   tmdbId,
 }: {
@@ -213,7 +223,7 @@ export const watchlistRouter = createTRPCRouter({
       z.object({
         title: z.string(),
         type: z.enum(["MOVIE", "SERIES"]),
-        year: z.date(),
+        date: z.date(),
         tmdbId: z.number(),
         description: z.string(),
         status: z.enum([
@@ -238,7 +248,7 @@ export const watchlistRouter = createTRPCRouter({
           description: input.description,
           title: input.title,
           type: input.type,
-          year: input.year,
+          date: input.date,
           tmdbId: input.tmdbId,
           status: input.status,
         },
@@ -281,14 +291,19 @@ export const watchlistRouter = createTRPCRouter({
           tmdbId: input.tmdbId,
         });
 
+        const posterBlur = await fetchBase64(
+          `https://image.tmdb.org/t/p/original${updated.poster_path}`,
+        );
+
         await ctx.db.watchlist.update({
           where: {
             id: input.id,
           },
           data: {
             title: updated.title,
-            poster: `https://image.tmdb.org/t/p/original${updated.poster_path}`,
-            year: new Date(updated.release_date),
+            poster: updated.poster_path,
+            posterBlur: posterBlur,
+            date: new Date(updated.release_date),
             rating: updated.vote_average,
             description: updated.overview,
             genres: updated.genres.map(
@@ -301,14 +316,19 @@ export const watchlistRouter = createTRPCRouter({
           tmdbId: input.tmdbId,
         });
 
+        const posterBlur = await fetchBase64(
+          `https://image.tmdb.org/t/p/original${updated.poster_path}`,
+        );
+
         await ctx.db.watchlist.update({
           where: {
             id: input.id,
           },
           data: {
             title: updated.name,
-            poster: `https://image.tmdb.org/t/p/original${updated.poster_path}`,
-            year: new Date(updated.first_air_date),
+            poster: updated.poster_path,
+            posterBlur: posterBlur,
+            date: new Date(updated.first_air_date),
             rating: updated.vote_average,
             description: updated.overview,
             genres: updated.genres.map(
@@ -320,6 +340,72 @@ export const watchlistRouter = createTRPCRouter({
         return;
       }
     }),
+  updater: publicProcedure.mutation(async ({ ctx }) => {
+    const toUpdate = await ctx.db.watchlist.findMany({
+      where: {
+        posterBlur: null,
+      },
+      take: 25,
+    });
+
+    console.log(toUpdate);
+
+    toUpdate.map(async (update) => {
+      if (update.type === "MOVIE") {
+        const updated = await getTMDBMovieDetails({
+          tmdbId: update.tmdbId,
+        });
+
+        const posterBlur = await fetchBase64(
+          `https://image.tmdb.org/t/p/original${updated.poster_path}`,
+        );
+
+        await ctx.db.watchlist.update({
+          where: {
+            id: update.id,
+          },
+          data: {
+            title: updated.title,
+            poster: updated.poster_path,
+            posterBlur: posterBlur,
+            date: new Date(updated.release_date),
+            rating: updated.vote_average,
+            description: updated.overview,
+            genres: updated.genres.map(
+              (genre: { id: number; name: string }) => genre.id,
+            ),
+          },
+        });
+      } else if (update.type === "SERIES") {
+        const updated = await getTMDBSeriesDetails({
+          tmdbId: update.tmdbId,
+        });
+
+        const posterBlur = await fetchBase64(
+          `https://image.tmdb.org/t/p/original${updated.poster_path}`,
+        );
+
+        await ctx.db.watchlist.update({
+          where: {
+            id: update.id,
+          },
+          data: {
+            title: updated.name,
+            poster: updated.poster_path,
+            posterBlur: posterBlur,
+            date: new Date(updated.first_air_date),
+            rating: updated.vote_average,
+            description: updated.overview,
+            genres: updated.genres.map(
+              (genre: { id: number; name: string }) => genre.id,
+            ),
+          },
+        });
+      } else {
+        return;
+      }
+    });
+  }),
   delete: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {

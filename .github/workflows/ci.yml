@@ -6,7 +6,7 @@ env:
   NEXTAUTH_SECRET: "secret"
   NEXTAUTH_URL: "http://localhost:3000"
   GOOGLE_CLIENT_ID: "1234"
-  GOOGLE_CLIENT_SECRET: "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"
+  GOOGLE_CLIENT_SECRET: "secret"
   DATABASE_URL: "https://example.com"
   TMDB_API_KEY: "secret"
   ADMINISTRATOR_EMAIL: "john.doe@gmail.com"

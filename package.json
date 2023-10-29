@@ -11,7 +11,8 @@
     "lint": "next lint",
     "start": "next start",
     "typecheck": "tsc --pretty --noEmit",
-    "format": "prettier --cache --check --write ./src"
+    "format": "prettier --cache --check --write ./src",
+    "check": "pnpm format && pnpm lint && pnpm typecheck"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",

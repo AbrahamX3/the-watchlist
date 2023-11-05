@@ -189,6 +189,7 @@ async function fetchBase64(path: string) {
 
   return base64;
 }
+
 async function getTMDBMovieDetails({
   tmdbId,
 }: {
@@ -216,7 +217,16 @@ async function getTMDBSeriesDetails({
 
 export const watchlistRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.db.watchlist.findMany();
+    return ctx.db.watchlist.findMany({
+      orderBy: [
+        {
+          date: "desc",
+        },
+        {
+          title: "desc",
+        },
+      ],
+    });
   }),
   create: publicProcedure
     .input(

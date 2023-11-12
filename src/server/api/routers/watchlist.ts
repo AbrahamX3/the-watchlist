@@ -249,12 +249,17 @@ export const watchlistRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
+      const posterBlur = await fetchBase64(
+        `https://image.tmdb.org/t/p/original${input.poster}`,
+      );
+
       await ctx.db.watchlist.create({
         data: {
           imdbId: await getIMDbId(input.tmdbId, input.type),
           genres: input.genres,
           rating: input.rating,
           poster: input.poster,
+          posterBlur: posterBlur,
           description: input.description,
           title: input.title,
           type: input.type,

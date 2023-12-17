@@ -69,7 +69,7 @@
     "react-day-picker": "^8.9.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.49.2",
-    "sharp": "^0.33.0",
+    "sharp": "^0.32.6",
     "sonner": "^1.2.4",
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.1.0",
@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.44.9",
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/react-modal-image": "^2.6.3",
@@ -98,5 +98,5 @@
   "ct3aMetadata": {
     "initVersion": "7.22.0"
   },
-  "packageManager": "pnpm@8.11.0"
+  "packageManager": "pnpm@8.8.0"
 }

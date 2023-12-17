@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: "Abraham's Watchlist",
   },
   description: "List of all the show's and movies I've watched",
-  icons: [{ rel: "icon", url: "/icon.png" }],
+  icons: [{ rel: "favicon", url: "/icon.webp" }],
 };
 
 export const dynamic = "force-dynamic";

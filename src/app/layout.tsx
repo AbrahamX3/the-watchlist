@@ -7,7 +7,6 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";
-import { QuickMenu } from "~/components/quick-menu";
 import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { ThemeProvider } from "~/components/theme-provider";
 import { getServerAuthSession } from "~/server/auth";
@@ -48,7 +47,6 @@ export default async function RootLayout({
             <TRPCReactProvider headers={headers()}>
               {children}
               <SiteFooter />
-              <QuickMenu />
               <TailwindIndicator />
             </TRPCReactProvider>
           </NextAuthProvider>

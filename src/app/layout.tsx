@@ -1,9 +1,10 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 
 import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";
@@ -11,11 +12,6 @@ import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { ThemeProvider } from "~/components/theme-provider";
 import { getServerAuthSession } from "~/server/auth";
 import { TRPCReactProvider } from "~/trpc/react";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -26,6 +22,8 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function RootLayout({
   children,
 }: {
@@ -35,7 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`font-sans ${inter.variable} scrollbar scrollbar-track-muted scrollbar-thumb-foreground scrollbar-w-2 scrollbar-h-2 selection:bg-gray-600 selection:text-white`}
+        className={`${GeistSans.variable} ${GeistMono.variable} font-sans scrollbar scrollbar-track-muted scrollbar-thumb-foreground scrollbar-w-2 scrollbar-h-2 selection:bg-gray-600 selection:text-white`}
       >
         <ThemeProvider
           attribute="class"

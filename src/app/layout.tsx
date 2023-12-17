@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";
+import { QuickMenu } from "~/components/quick-menu";
 import { TailwindIndicator } from "~/components/tailwind-indicator";
 import { ThemeProvider } from "~/components/theme-provider";
 import { getServerAuthSession } from "~/server/auth";
@@ -34,7 +35,9 @@ export default async function RootLayout({
   const session = await getServerAuthSession();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable}`}>
+      <body
+        className={`font-sans ${inter.variable} scrollbar scrollbar-track-muted scrollbar-thumb-foreground scrollbar-w-2 scrollbar-h-2 selection:bg-gray-600 selection:text-white`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -45,6 +48,7 @@ export default async function RootLayout({
             <TRPCReactProvider headers={headers()}>
               {children}
               <SiteFooter />
+              <QuickMenu />
               <TailwindIndicator />
             </TRPCReactProvider>
           </NextAuthProvider>

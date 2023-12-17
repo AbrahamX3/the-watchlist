@@ -15,7 +15,10 @@ export default async function Dashboard() {
     <>
       <SiteHeader />
       <TableContainer>
-        <DataTableHeader mobileTitle="Watchlist" desktopTitle="Watchlist" />
+        <DataTableHeader
+          mobileTitle="My Personal Watchlist"
+          desktopTitle="My Personal Watchlist"
+        />
         <PublicDataTableView data={data} />
         <Toaster richColors position="bottom-left" />
       </TableContainer>

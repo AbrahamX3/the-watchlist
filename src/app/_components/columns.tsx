@@ -27,6 +27,7 @@ export function PublicWatchlistColumns() {
       },
     },
     {
+      id: "Year",
       accessorKey: "date",
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Year" />
@@ -35,7 +36,7 @@ export function PublicWatchlistColumns() {
         return (
           <div className="flex space-x-2">
             <span className="max-w-[500px] truncate font-medium">
-              {new Date(row.getValue("date")).getFullYear()}
+              {new Date(row.getValue("Year")).getFullYear()}
             </span>
           </div>
         );

@@ -2,7 +2,7 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 
 import { SiteFooter } from "~/components/footer";
@@ -44,7 +44,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthProvider session={session}>
-            <TRPCReactProvider headers={headers()}>
+            <TRPCReactProvider cookies={cookies().toString()}>
               {children}
               <SiteFooter />
               <TailwindIndicator />

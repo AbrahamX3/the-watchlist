@@ -1,8 +1,8 @@
 # Abraham's Personal Watchlist
 
-#### Check it out here!
-
-`https://watchlist.abraham.lat`
+> [!NOTE]
+> Check it out here
+> [https://watchlist.abraham.lat](https://watchlist.abraham.lat)
 
 ## About
 
@@ -22,3 +22,4 @@ watchlist.
 - [shadcn/ui](https://ui.shadcn.com)
 - [supabase](https://supabase.com)
 - [TMDB API](https://www.themoviedb.org)
+- [Vercel](https://www.vercel.com)

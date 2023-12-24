@@ -1,10 +1,11 @@
 import { type Metadata } from "next";
 import { type Prisma } from "@prisma/client";
-import { Toaster } from "sonner";
 
 import TableContainer from "~/components/ui/datatable/data-table-container";
 import DataTableHeader from "~/components/ui/datatable/data-table-header";
+import { Toaster } from "~/components/ui/sonner";
 import { api } from "~/trpc/server";
+
 import WatchlistActionCreate from "./_components/create";
 import DashboardDataTableView from "./_components/data-table-view";
 import SiteHeader from "./_components/header";

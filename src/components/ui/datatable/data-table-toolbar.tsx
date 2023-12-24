@@ -8,6 +8,7 @@ import { X, type LucideIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { DataTableViewOptions } from "~/components/ui/datatable/data-table-view-options";
 import { Input } from "~/components/ui/input";
+
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 
 interface Options {

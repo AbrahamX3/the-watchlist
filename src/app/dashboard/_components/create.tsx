@@ -37,7 +37,6 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import {
   Select,
@@ -177,42 +176,37 @@ export default function WatchlistActionCreate() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="flex w-full flex-col items-center gap-4 align-middle">
-              <div className="flex w-full items-center justify-center gap-4">
-                <div className="flex w-1/2 flex-col gap-4 align-middle">
-                  <Label htmlFor="search">Search</Label>
-                  <Input
-                    id="search"
-                    autoComplete="off"
-                    type="search"
-                    placeholder="Search for a title..."
-                    value={searchTitle}
-                    disabled={search.isLoading}
-                    onChange={(e) => setSearchTitle(e.target.value)}
-                  />
-                </div>
-                <div className="flex flex-col gap-4 align-middle">
-                  <div className="pt-4" />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="bottom-0 col-span-1"
-                    disabled={search.isLoading}
-                    onClick={() => {
-                      if (searchTitle) {
-                        search.mutate({
-                          title: searchTitle,
-                        });
-                      }
-                    }}
-                  >
-                    <span>Search</span>
-                    {search.isLoading ? (
-                      <Loader2 className="ml-4 h-4 w-4 animate-spin" />
-                    ) : (
-                      <SearchIcon className="ml-4 h-4 w-4" />
-                    )}
-                  </Button>
-                </div>
+              <div className="grid w-full grid-cols-3 gap-4">
+                <Input
+                  id="search"
+                  autoComplete="off"
+                  type="search"
+                  placeholder="Search for title..."
+                  value={searchTitle}
+                  className="col-span-2"
+                  disabled={search.isLoading}
+                  onChange={(e) => setSearchTitle(e.target.value)}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="col-span-1"
+                  disabled={search.isLoading}
+                  onClick={() => {
+                    if (searchTitle) {
+                      search.mutate({
+                        title: searchTitle,
+                      });
+                    }
+                  }}
+                >
+                  <span>{search.isLoading ? "Searching..." : "Search"}</span>
+                  {search.isLoading ? (
+                    <Loader2 className="ml-4 h-4 w-4 animate-spin" />
+                  ) : (
+                    <SearchIcon className="ml-4 h-4 w-4" />
+                  )}
+                </Button>
               </div>
               {titleList.length > 0 && (
                 <FormField
@@ -230,12 +224,12 @@ export default function WatchlistActionCreate() {
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="w-full truncate">
+                          <SelectTrigger className="truncate">
                             <SelectValue placeholder="Select a title..." />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <ScrollArea className={`h-40 w-full`}>
+                          <ScrollArea className="h-40">
                             {titleList.length > 0 ? (
                               titleList.map((item) => {
                                 if (item.media_type === "movie") {
@@ -243,38 +237,32 @@ export default function WatchlistActionCreate() {
                                     <SelectItem
                                       key={item.id}
                                       value={item.id.toString()}
+                                      className="flex w-full flex-row justify-between gap-x-2"
                                     >
-                                      <div className="flex w-full items-center justify-between gap-4 align-middle">
-                                        {item.poster_path && item.title ? (
-                                          <Image
-                                            src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-                                            alt={item.title}
-                                            width={15}
-                                            height={50}
-                                            style={{
-                                              width: "auto",
-                                              height: "auto",
-                                            }}
-                                            className="rounded-md"
-                                          />
-                                        ) : (
-                                          <div className="h-[30px] w-[15px] bg-gray-200" />
-                                        )}
-                                        <span
-                                          className="min-w-[300px] max-w-[200px] overflow-hidden truncate text-ellipsis whitespace-nowrap"
-                                          title={item.title}
-                                        >
+                                      <div className="flex w-full flex-row justify-between gap-x-4">
+                                        <span>
+                                          {item.poster_path && item.title ? (
+                                            <Image
+                                              src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+                                              alt={item.title}
+                                              width={15}
+                                              height={50}
+                                              className="h-auto w-auto rounded-md"
+                                            />
+                                          ) : (
+                                            <div className="h-[50px] w-[15px] bg-gray-200" />
+                                          )}
+                                        </span>
+                                        <span className="max-w-56 overflow-hidden truncate text-ellipsis whitespace-nowrap font-bold">
                                           {item.title}
                                         </span>
-                                        {item.vote_average ? (
-                                          <span className="w-[30px] justify-self-end text-right">
-                                            {item.vote_average.toFixed(1)}
-                                          </span>
-                                        ) : (
-                                          <span className="w-[30px] justify-self-end text-right">
-                                            0.0
-                                          </span>
-                                        )}
+                                        <span className="text-sm font-semibold">
+                                          (
+                                          {item.vote_average
+                                            ? item.vote_average.toFixed(1)
+                                            : 0.0}
+                                          )
+                                        </span>
                                       </div>
                                     </SelectItem>
                                   );
@@ -286,37 +274,28 @@ export default function WatchlistActionCreate() {
                                       key={item.id}
                                       value={item.id.toString()}
                                     >
-                                      <div className="flex w-full items-center justify-between gap-4 align-middle">
+                                      <div className="flex w-full flex-row justify-between gap-x-4">
                                         {item.poster_path && item.name ? (
                                           <Image
                                             src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
                                             alt={item.name}
                                             width={15}
                                             height={50}
-                                            style={{
-                                              width: "auto",
-                                              height: "auto",
-                                            }}
-                                            className="rounded-md"
+                                            className="h-auto w-auto rounded-md"
                                           />
                                         ) : (
-                                          <div className="h-[30px] w-[15px] bg-gray-200" />
+                                          <div className="h-[50px] w-[15px] bg-gray-200" />
                                         )}
-                                        <span
-                                          className="min-w-[300px] max-w-[200px] overflow-hidden truncate text-ellipsis whitespace-nowrap"
-                                          title={item.name}
-                                        >
+                                        <span className="max-w-56 overflow-hidden truncate text-ellipsis whitespace-nowrap font-bold">
                                           {item.name}
                                         </span>
-                                        {item.vote_average ? (
-                                          <span className="w-[30px] justify-self-end text-right">
-                                            {item.vote_average.toFixed(1)}
-                                          </span>
-                                        ) : (
-                                          <span className="w-[30px] justify-self-end text-right">
-                                            0.0
-                                          </span>
-                                        )}
+                                        <span className="text-sm font-semibold">
+                                          (
+                                          {item.vote_average
+                                            ? item.vote_average.toFixed(1)
+                                            : 0.0}
+                                          )
+                                        </span>
                                       </div>
                                     </SelectItem>
                                   );
@@ -494,7 +473,16 @@ export default function WatchlistActionCreate() {
                 <Close asChild>
                   <Button variant="outline">Close</Button>
                 </Close>
-                <Button type="submit">Add to Watchlist</Button>
+                <Button disabled={watchlist.isLoading} type="submit">
+                  {watchlist.isLoading ? (
+                    <div className="flex items-center gap-x-2 align-middle">
+                      <span>Adding to Watchlist</span>
+                      <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                    </div>
+                  ) : (
+                    "Add to Watchlist"
+                  )}
+                </Button>
               </DialogFooter>
             )}
           </form>

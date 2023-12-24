@@ -6,6 +6,7 @@ import { type ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "~/components/ui/datatable/data-table-column-header";
 import DataTableLabelId from "~/components/ui/datatable/data-table-label-id";
 import { genreOptions, statusOptions, typeOptions } from "~/lib/options";
+
 import { WatchlistActions } from "./actions";
 
 export type WatchlistColumn = Prisma.WatchlistGetPayload<object>;

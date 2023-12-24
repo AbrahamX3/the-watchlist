@@ -2,6 +2,7 @@
 
 import { DataTable } from "~/components/ui/datatable/data-table";
 import { genreOptions, statusOptions, typeOptions } from "~/lib/options";
+
 import { PublicWatchlistColumns, type WatchlistColumn } from "./columns";
 
 export default function PublicDataTableView({

@@ -2,6 +2,7 @@
 
 import { DataTable } from "~/components/ui/datatable/data-table";
 import { genreOptions, statusOptions, typeOptions } from "~/lib/options";
+
 import { DashboardWatchlistColumns, type WatchlistColumn } from "./columns";
 
 export default function DashboardDataTableView({

@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+
 import { type WatchlistColumn } from "./columns";
 
 interface DataTableRowActionsProps<TData> {

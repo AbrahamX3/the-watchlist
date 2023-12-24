@@ -1,5 +1,12 @@
-/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').options} */
+/** @typedef  {import("prettier").Config} PrettierConfig */
+
 const config = {
+  arrowParens: "always",
+  printWidth: 80,
+  singleQuote: false,
+  semi: true,
+  trailingComma: "all",
+  tabWidth: 2,
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
@@ -9,17 +16,10 @@ const config = {
     "^(next/(.*)$)|^(next$)",
     "<THIRD_PARTY_MODULES>",
     "",
-    "^@/(.*)$",
-    "",
     "^~/(.*)$",
+    "",
     "^[./]",
   ],
-  arrowParens: "always",
-  printWidth: 80,
-  singleQuote: false,
-  semi: true,
-  trailingComma: "all",
-  tabWidth: 2,
   proseWrap: "always",
 };
 

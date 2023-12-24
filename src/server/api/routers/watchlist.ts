@@ -363,8 +363,6 @@ export const watchlistRouter = createTRPCRouter({
       take: 25,
     });
 
-    console.log(toUpdate);
-
     toUpdate.map(async (update) => {
       if (update.type === "MOVIE") {
         const updated = await getTMDBMovieDetails({

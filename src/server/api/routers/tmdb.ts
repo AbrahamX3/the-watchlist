@@ -82,7 +82,7 @@ export const tmdbRouter = createTRPCRouter({
 
         return data;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }),
 });

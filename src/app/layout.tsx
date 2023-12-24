@@ -1,10 +1,10 @@
 import "~/styles/globals.css";
 
-import { type Metadata } from "next";
-import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { type Metadata } from "next";
+import { cookies } from "next/headers";
 
 import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: "Abraham's Watchlist",
   },
   description: "List of all the show's and movies I've watched",
-  icons: [{ rel: "favicon", url: "/icon.webp" }],
+  icons: [{ rel: "icon", url: "/icon.webp" }],
 };
 
 export const dynamic = "force-dynamic";

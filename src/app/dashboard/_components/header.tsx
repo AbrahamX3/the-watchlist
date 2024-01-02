@@ -17,7 +17,7 @@ export default function SiteHeader() {
             <span className="flex items-center gap-2 align-middle font-bold">
               <span className="hidden sm:inline-block">Abraham&apos;s</span>
               <span className="hidden sm:inline-block">Watchlist</span>
-              <span> Dashboard</span>
+              <span>Dashboard</span>
             </span>
           </Link>
         </div>

@@ -363,7 +363,7 @@ export const watchlistRouter = createTRPCRouter({
       take: 25,
     });
 
-    toUpdate.map(async (update) => {
+    for (const update of toUpdate) {
       if (update.type === "MOVIE") {
         const updated = await getTMDBMovieDetails({
           tmdbId: update.tmdbId,
@@ -414,10 +414,8 @@ export const watchlistRouter = createTRPCRouter({
             ),
           },
         });
-      } else {
-        return;
       }
-    });
+    }
   }),
   delete: publicProcedure
     .input(z.object({ id: z.string() }))

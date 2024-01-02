@@ -1,10 +1,10 @@
 import "~/styles/globals.css";
 
+import { type Metadata } from "next";
+import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { type Metadata } from "next";
-import { cookies } from "next/headers";
 
 import { SiteFooter } from "~/components/footer";
 import NextAuthProvider from "~/components/nextauth-provider";

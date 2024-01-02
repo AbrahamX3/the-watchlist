@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Close } from "@radix-ui/react-dialog";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -127,7 +128,16 @@ export default function WatchlistActionUpdateStatus({
               <Close asChild>
                 <Button variant="outline">Close</Button>
               </Close>
-              <Button type="submit">Update New Status</Button>
+              <Button disabled={updateStatus.isLoading} type="submit">
+                {updateStatus.isLoading ? (
+                  <div className="flex items-center gap-x-2 align-middle">
+                    <span>Updating New Status</span>
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                  </div>
+                ) : (
+                  "Update New Status"
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>

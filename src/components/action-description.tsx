@@ -31,24 +31,25 @@ export default function WatchlistActionDescription({
   return (
     <Dialog modal open={open} onOpenChange={() => onChange(!open)}>
       <DialogContent className="h-screen max-h-[90dvh] sm:h-auto">
-        <DialogHeader>
+        <DialogHeader className="flex items-center justify-center">
           <DialogTitle>
             {row.title}
+
             {row.rating ? (
               <Badge className="ml-2 text-xs" variant="secondary">{`${Number(
                 row.rating,
               ).toFixed(1)} / 10`}</Badge>
             ) : (
-              ""
+              <Badge className="ml-2 text-xs" variant="secondary">
+                N/A
+              </Badge>
             )}
           </DialogTitle>
           <DialogDescription asChild>
-            {row.date ? (
+            {row.date && (
               <Badge variant="outline" className="w-fit">
                 {new Date(row.date).toLocaleDateString()}
               </Badge>
-            ) : (
-              ""
             )}
           </DialogDescription>
         </DialogHeader>

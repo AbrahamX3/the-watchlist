@@ -338,12 +338,10 @@ export default function WatchlistActionCreate() {
                     </a>
                   </CardTitle>
                   <CardDescription className="mt-2 flex gap-2 text-base">
-                    {selectedTitle.vote_average ? (
+                    {selectedTitle.vote_average && (
                       <Badge className="text-xs" variant="secondary">{`${Number(
                         selectedTitle.vote_average,
                       ).toFixed(1)} / 10`}</Badge>
-                    ) : (
-                      ""
                     )}
                     {selectedTitle.first_air_date ? (
                       <Badge variant="outline">

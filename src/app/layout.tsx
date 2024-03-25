@@ -1,7 +1,6 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
@@ -42,7 +41,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthProvider session={session}>
-            <TRPCReactProvider cookies={cookies().toString()}>
+            <TRPCReactProvider>
               {children}
               <SiteFooter />
               <TailwindIndicator />

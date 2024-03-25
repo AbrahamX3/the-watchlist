@@ -1,7 +1,7 @@
 import "server-only";
 
 import { cache } from "react";
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import {
   createTRPCProxyClient,
   loggerLink,
@@ -21,11 +21,11 @@ import { transformer } from "./shared";
  * handling a tRPC call from a React Server Component.
  */
 const createContext = cache(() => {
+  const heads = new Headers(headers());
+  heads.set("x-trpc-source", "rsc");
+
   return createTRPCContext({
-    headers: new Headers({
-      cookie: cookies().toString(),
-      "x-trpc-source": "rsc",
-    }),
+    headers: heads,
   });
 });
 

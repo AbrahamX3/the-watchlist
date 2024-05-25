@@ -14,7 +14,7 @@ model Watchlist {
   rating      Float?
   date        DateTime? @db.Date
   imdbId      String?   @unique
-  tmdbId      Int       @unique
+  tmdbId      Int
   poster      String?
   type        Type
   status      Status    @default(PENDING)
@@ -22,6 +22,8 @@ model Watchlist {
   updatedAt   DateTime  @updatedAt
   genres      Int[]
   posterBlur  String?
+
+  @@unique([tmdbId, type])
 }
 
 model Account {

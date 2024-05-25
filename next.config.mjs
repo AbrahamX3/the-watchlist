@@ -11,6 +11,12 @@ const config = {
       },
     ],
   },
+  experimental: {
+    reactCompiler: {
+      compilationMode: "annotation",
+    },
+  },
 };
 
+// @ts-expect-error -- this is a valid config
 export default withPlaiceholder(config);

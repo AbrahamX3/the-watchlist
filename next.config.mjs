@@ -18,5 +18,5 @@ const config = {
   },
 };
 
-// @ts-expect-error -- this is a valid config
+// @ts-ignore
 export default withPlaiceholder(config);
